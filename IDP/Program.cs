@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<UsuarioContext>(opt =>
-    opt.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=idp;User ID=sa;Password=123;"));
+builder.Services.AddDbContext<IDPContext>(options =>
+    options.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=idp;User ID=sa;Password=123;"));
 //builder.Services.AddSwaggerGen(c =>
 //{
 //    c.SwaggerDoc("v1", new() { Title = "IDP", Version = "v1" });

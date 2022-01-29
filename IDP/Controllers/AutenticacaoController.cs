@@ -8,9 +8,9 @@ namespace IDP.Controllers
     [ApiController]
     public class AutenticacaoController : ControllerBase
     {
-        private readonly UsuarioContext _context;
+        private readonly IDPContext _context;
 
-        public AutenticacaoController(UsuarioContext context)
+        public AutenticacaoController(IDPContext context)
         {
             _context = context;
         }
@@ -19,7 +19,7 @@ namespace IDP.Controllers
         [HttpPost("Login")]
         public ObjectResult Login(string login, string senha)
         {
-            var usuario = _context.Usuario.Where(u => u.Login.Equals(login) && u.Senha.Equals(senha)).FirstOrDefault();
+            var usuario = _context.Usuario.First(u => u.Login.Equals(login) && u.Senha.Equals(senha));
 
 
             if (usuario != null)

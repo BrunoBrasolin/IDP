@@ -12,47 +12,47 @@ namespace IDP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class SistemasController : ControllerBase
     {
         private readonly IDPContext _context;
 
-        public UsuariosController(IDPContext context)
+        public SistemasController(IDPContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Sistemas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
+        public async Task<ActionResult<IEnumerable<Sistema>>> GetSistema()
         {
-            return await _context.Usuario.ToListAsync();
+            return await _context.Sistema.ToListAsync();
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Sistemas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        public async Task<ActionResult<Sistema>> GetSistema(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+            var sistema = await _context.Sistema.FindAsync(id);
 
-            if (usuario == null)
+            if (sistema == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return sistema;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Sistemas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public async Task<IActionResult> PutSistema(int id, Sistema sistema)
         {
-            if (id != usuario.Id)
+            if (id != sistema.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(sistema).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace IDP.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!SistemaExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace IDP.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Sistemas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Sistema>> PostSistema(Sistema sistema)
         {
-            _context.Usuario.Add(usuario);
+            _context.Sistema.Add(sistema);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetSistema", new { id = sistema.Id }, sistema);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Sistemas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(int id)
+        public async Task<IActionResult> DeleteSistema(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario == null)
+            var sistema = await _context.Sistema.FindAsync(id);
+            if (sistema == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Sistema.Remove(sistema);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UsuarioExists(int id)
+        private bool SistemaExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Sistema.Any(e => e.Id == id);
         }
     }
 }

@@ -16,11 +16,13 @@ namespace IDP.Models
         [Key]
         [Column("usua_id")]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Login obrigatório")]
+
         [Column("usua_login")]
+        [Required(ErrorMessage = "Login obrigatório")]
         public string Login { get; set; }
-        [Required(ErrorMessage = "Senha obrigatória")]
+
         [Column("usua_senha")]
+        [Required(ErrorMessage = "Senha obrigatória")]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
     }

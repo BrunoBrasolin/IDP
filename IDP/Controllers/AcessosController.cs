@@ -12,47 +12,47 @@ namespace IDP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class AcessosController : ControllerBase
     {
         private readonly IDPContext _context;
 
-        public UsuariosController(IDPContext context)
+        public AcessosController(IDPContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Acessos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
+        public async Task<ActionResult<IEnumerable<Acesso>>> GetAcesso()
         {
-            return await _context.Usuario.ToListAsync();
+            return await _context.Acesso.ToListAsync();
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Acessos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        public async Task<ActionResult<Acesso>> GetAcesso(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+            var acesso = await _context.Acesso.FindAsync(id);
 
-            if (usuario == null)
+            if (acesso == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return acesso;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Acessos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public async Task<IActionResult> PutAcesso(int id, Acesso acesso)
         {
-            if (id != usuario.Id)
+            if (id != acesso.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(acesso).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace IDP.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!AcessoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace IDP.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios
+        // POST: api/Acessos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Acesso>> PostAcesso(Acesso acesso)
         {
-            _context.Usuario.Add(usuario);
+            _context.Acesso.Add(acesso);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("GetAcesso", new { id = acesso.Id }, acesso);
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Acessos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(int id)
+        public async Task<IActionResult> DeleteAcesso(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario == null)
+            var acesso = await _context.Acesso.FindAsync(id);
+            if (acesso == null)
             {
                 return NotFound();
             }
 
-            _context.Usuario.Remove(usuario);
+            _context.Acesso.Remove(acesso);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UsuarioExists(int id)
+        private bool AcessoExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Acesso.Any(e => e.Id == id);
         }
     }
 }

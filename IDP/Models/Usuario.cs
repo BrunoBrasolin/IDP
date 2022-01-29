@@ -21,6 +21,7 @@ namespace IDP.Models
         public string Login { get; set; }
         [Required(ErrorMessage = "Senha obrigatória")]
         [Column("usua_senha")]
+        [DataType(DataType.Password)]
         public string Senha { get; set; }
     }
 }

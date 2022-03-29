@@ -17,15 +17,21 @@ namespace IDP.Controllers
 
         // POST: api/Autenticacao/Login
         [HttpPost("Login")]
-        public ObjectResult Login(string login, string senha)
+        public ObjectResult Login(string login, string senha, string dominio)
         {
-            var usuario = _context.Usuario.First(u => u.Login.Equals(login) && u.Senha.Equals(senha));
-
-
-            if (usuario != null)
-                return StatusCode(StatusCodes.Status200OK, "Sucesso ao fazer login");
-            else
+            Usuario usuario = _context.Usuario.FirstOrDefault(u => u.Login.Equals(login) && u.Senha.Equals(senha));
+            if (usuario == null)
                 return StatusCode(StatusCodes.Status401Unauthorized, "Erro ao fazer login");
+
+            Sistema sistema = _context.Sistema.FirstOrDefault(s => s.Dominio.Equals(dominio));
+            if (sistema == null)
+                return StatusCode(StatusCodes.Status404NotFound, "Erro ao encontrar sistema");
+
+            Acesso acesso = _context.Acesso.FirstOrDefault(a => a.UsuarioId.Equals(usuario.Id) && a.SistemaId.Equals(sistema.Id));
+            if (acesso == null)
+                return StatusCode(StatusCodes.Status401Unauthorized, $"Usuário {usuario.Login} sem acesso ao sistema {sistema.NomeSistema}");
+            
+            return StatusCode(StatusCodes.Status200OK, $"Usuario: {usuario.Login} | Sistema: {sistema.NomeSistema}");
         }
 
         // POST api/Autenticacao/ValidaToken

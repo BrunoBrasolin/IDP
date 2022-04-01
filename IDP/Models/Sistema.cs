@@ -6,11 +6,10 @@ namespace IDP.Models
     [Table("sistemas")]
     public class Sistema
     {
-        public Sistema(int id, string nomeSistema, string dominio)
+        public Sistema(int id, string nomeSistema)
         {
             Id = id;
             NomeSistema = nomeSistema;
-            Dominio = dominio;
         }
 
         [Key]
@@ -20,9 +19,5 @@ namespace IDP.Models
         [Column("stms_sistema")]
         [Required(ErrorMessage = "Nome do sistema obrigatório")]
         public string NomeSistema { get; set; }
-
-        [Column("stms_dominio")]
-        [Required(ErrorMessage = "Domínio do sistema obrigatório")]
-        public string Dominio { get; set; }
     }
 }

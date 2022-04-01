@@ -11,8 +11,7 @@ CREATE TABLE [dbo].[usuarios](
 
 CREATE TABLE [dbo].[sistemas](
 	[stms_id] [int] PRIMARY KEY IDENTITY (1,1) NOT NULL,
-	[stms_sistema] [varchar](255) UNIQUE NOT NULL,
-	[stms_dominio] [varchar](255) UNIQUE NOT NULL
+	[stms_sistema] [varchar](255) UNIQUE NOT NULL
 );
 
 CREATE TABLE [dbo].[acessos](

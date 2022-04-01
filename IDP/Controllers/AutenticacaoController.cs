@@ -17,13 +17,13 @@ namespace IDP.Controllers
 
         // POST: api/Autenticacao/Login
         [HttpPost("Login")]
-        public ObjectResult Login(string login, string senha, string dominio)
+        public ObjectResult Login(string login, string senha, int id)
         {
             Usuario usuario = _context.Usuario.FirstOrDefault(u => u.Login.Equals(login) && u.Senha.Equals(senha));
             if (usuario == null)
                 return StatusCode(StatusCodes.Status401Unauthorized, "Erro ao fazer login");
 
-            Sistema sistema = _context.Sistema.FirstOrDefault(s => s.Dominio.Equals(dominio));
+            Sistema sistema = _context.Sistema.FirstOrDefault(s => s.Id.Equals(id));
             if (sistema == null)
                 return StatusCode(StatusCodes.Status404NotFound, "Erro ao encontrar sistema");
 

@@ -33,12 +33,5 @@ namespace IDP.Controllers
             
             return StatusCode(StatusCodes.Status200OK, $"Usuario: {usuario.Login} | Sistema: {sistema.NomeSistema}");
         }
-
-        // POST api/Autenticacao/ValidaToken
-        [HttpPost("ValidaToken")]
-        public string ValidaToken(string token)
-        {
-            return "";
-        }
     }
 }
